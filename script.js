@@ -1,3 +1,5 @@
+let companies=[];
+
 function saveToConsole(){
     let newCompany = {
         companyName: document.getElementById("InputCompanyName").value,
@@ -11,8 +13,11 @@ function saveToConsole(){
         companyIndustry: document.getElementById("FormIndustry").value,
         active: document.getElementById("checkActive").checked
     }
-
     console.log(newCompany);
+    companies.push(newCompany);
+    addToList(companies);
+    document.getElementById("form").style.display = "none";
+    document.getElementById("list").style.display = "block";
 }
 function pullFromConsole(){
     let exampleCompany = {
@@ -37,4 +42,53 @@ function pullFromConsole(){
     document.getElementById("InputUwagi").value= exampleCompany.comments,
     document.getElementById("FormIndustry").value= exampleCompany.companyIndustry,
     document.getElementById("checkActive").checked = exampleCompany.active
+
+}
+
+function showForm(){
+    document.getElementById("form").style.display = "block";
+    document.getElementById("list").style.display = "none";
+}
+function showList(){
+    document.getElementById("form").style.display = "none";
+    document.getElementById("list").style.display = "block";
+}
+
+function addToList(companies){
+    let ul = document.getElementById("list-group");
+    ul.innerHTML="";
+    companies.forEach(element => {
+        ul.innerHTML+=`<li class = "list-group-item" onclick="editClient(${element.NIP})">Nazwa:${element.companyName},NIP:${element.NIP}`
+    });
+}
+function editClient(nip){
+    companies.forEach(element=>{
+        if(element.NIP == nip){
+            let companyToEdit = {
+                companyName: element.companyName,
+                NIP: element.NIP,
+                city: element.city,
+                street: element.street,
+                houseNo: element.houseNo,
+                flatNo:element.flatNo ,
+                postCode:element.postCode ,
+                comments: element.comments ,
+                companyIndustry:element.companyIndustry,
+                active: element.active
+                
+            }
+            document.getElementById("InputCompanyName").value= companyToEdit.companyName,
+            document.getElementById("InputNip").value= companyToEdit.NIP,
+            document.getElementById("InputCity").value= companyToEdit.city,
+            document.getElementById("InputStreet" ).value= companyToEdit.street,
+            document.getElementById("InputHouseNo").value= companyToEdit.houseNo,
+            document.getElementById("InputFlatNo" ).value= companyToEdit.flatNo,
+            document.getElementById("InputPostCode").value= companyToEdit.postCode,
+            document.getElementById("InputUwagi").value= companyToEdit.comments,
+            document.getElementById("FormIndustry").value= companyToEdit.companyIndustry,
+            document.getElementById("checkActive").checked = companyToEdit.active
+        }
+    document.getElementById("form").style.display = "block";
+    document.getElementById("list").style.display = "none";
+    });
 }
