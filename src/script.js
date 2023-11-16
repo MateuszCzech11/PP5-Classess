@@ -1,20 +1,21 @@
 let companies=[];
 
 function saveToConsole(){
-    let newCompany = {
-        companyName: document.getElementById("InputCompanyName").value,
-        NIP: document.getElementById("InputNip").value,
-        city: document.getElementById("InputCity").value,
-        street: document.getElementById("InputStreet" ).value,
-        houseNo: document.getElementById("InputHouseNo").value,
-        flatNo: document.getElementById("InputFlatNo" ).value,
-        postCode: document.getElementById("InputPostCode").value,
-        comments: document.getElementById("InputUwagi").value,
-        companyIndustry: document.getElementById("FormIndustry").value,
-        active: document.getElementById("checkActive").checked
-    }
-    console.log(newCompany);
-    companies.push(newCompany);
+    let newClient= new Client();
+    newClient.companyName=document.getElementById("InputCompanyName").value;
+    newClient.nip=document.getElementById("InputNip").value;
+    newClient.city=document.getElementById("InputCity").value;
+    newClient.street=document.getElementById("InputStreet" ).value;
+    newClient.houseNo=document.getElementById("InputHouseNo").value;
+    newClient.flatNo=document.getElementById("InputFlatNo").value;
+    newClient.postCode=document.getElementById("InputPostCode").value;
+    newClient.comments=document.getElementById("InputUwagi").value;
+    newClient.companyIndustry=document.getElementById("FormIndustry").value;
+    newClient.active=document.getElementById("checkActive").checked;
+
+
+    console.log(newClient);
+    companies.push(newClient);
     addToList(companies);
     document.getElementById("form").style.display = "none";
     document.getElementById("list").style.display = "block";
@@ -48,10 +49,14 @@ function pullFromConsole(){
 function showForm(){
     document.getElementById("form").style.display = "block";
     document.getElementById("list").style.display = "none";
+    document.getElementById("buttonShowForm").style.display = "none";
+    document.getElementById("buttonShowList").style.display = "block";
 }
 function showList(){
     document.getElementById("form").style.display = "none";
     document.getElementById("list").style.display = "block";
+    document.getElementById("buttonShowList").style.display = "none";
+    document.getElementById("buttonShowForm").style.display = "block";
 }
 
 function addToList(companies){
